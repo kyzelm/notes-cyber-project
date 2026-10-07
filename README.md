@@ -41,13 +41,15 @@ and reseeded on every start, so a restart resets all data.
 
 ## 3. Attacks
 
-Scripts in `attacks/` take the base URL as `$1` (defaults to the vuln server):
+Scripts in `attacks/` take the base URL as `$1`, or just a port via `PORT=`
+(defaults to the vuln server on `:3000`):
 
 ```bash
 bash attacks/sqli.sh                         # vuln: bypass + dump creds
 bash attacks/sqli.sh https://localhost:3443  # secure: fails
 bash attacks/idor.sh                         # read another user's note
 bash attacks/bruteforce.sh                   # no rate limit vs 429
+PORT=8080 bash attacks/sqli.sh               # vuln server on a custom port
 ```
 
 - `attacks/xss-payload.txt` — stored-XSS payloads to paste into a note body.
