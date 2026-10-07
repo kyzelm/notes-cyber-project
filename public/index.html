@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes</title>
+  <!-- external stylesheet: same-origin, so CSP default-src 'self' allows it.
+       (inline <style> would be blocked by CSP in secure mode) -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Notes <span id="mode"></span></h1>
+
+  <section id="auth">
+    <div class="row">
+      <input id="username" placeholder="username" autocomplete="username">
+      <input id="password" type="password" placeholder="password" autocomplete="current-password">
+    </div>
+    <div class="row">
+      <button id="loginBtn">Log in</button>
+      <button id="registerBtn">Register</button>
+    </div>
+    <p id="authMsg"></p>
+  </section>
+
+  <section id="app" class="hide">
+    <p>Logged in as <b id="who"></b> <button id="logoutBtn">Log out</button></p>
+    <input id="search" placeholder="search notes by title...">
+    <h3>New note</h3>
+    <input id="title" placeholder="title">
+    <textarea id="body" placeholder="body (try: &lt;img src=x onerror=alert(1)&gt;)"></textarea>
+    <button id="addBtn">Add note</button>
+    <h3>Your notes</h3>
+    <div id="notes"></div>
+  </section>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
