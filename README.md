@@ -1,4 +1,4 @@
-# lisbrus — Secure vs Vulnerable Notes CRUD
+# notes-cyber-project — Secure vs Vulnerable Notes CRUD
 
 A single notes application that runs in two modes from one codebase, toggled by
 the `SECURE` environment variable. It demonstrates 11 common web
