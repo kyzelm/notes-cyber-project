@@ -1,5 +1,6 @@
-\documentclass[11pt,a4paper]{article}
-\usepackage[margin=2.4cm]{geometry}
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{parskip}
 \usepackage{fontspec}
 \usepackage[polish]{babel}
 \setmonofont{NotoSansMono-Regular.ttf}[Scale=0.82]
@@ -15,32 +16,39 @@
 \newcommand{\vuln}{\textsc{vuln}}
 \newcommand{\secure}{\textsc{secure}}
 \fvset{fontsize=\footnotesize,breaklines,breakanywhere,frame=single,framesep=2mm,rulecolor=\color{gray}}
-\newcommand{\dowod}[2]{\VerbatimInput[label=#2]{evidence/#1}}
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{Verbatim}{\par\medskip\noindent\begin{minipage}{\linewidth}}
+\AfterEndEnvironment{Verbatim}{\end{minipage}\par\medskip}
+\newcommand{\dowod}[3][]{\par\medskip\noindent\begin{minipage}{\linewidth}\VerbatimInput[label=#3,#1]{evidence/#2}\end{minipage}\par\medskip}
 \setlist{itemsep=2pt,topsep=3pt}
-\setlength{\parskip}{4pt}
 \emergencystretch=2em
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \begin{document}
+\pagenumbering{gobble}
 \begin{titlepage}
 \centering
-\vspace*{2cm}
+\vspace*{\fill}
 {\large \uczelnia\par}
-\vspace{3cm}
-{\large Wybrane Aspekty Cyberbezpieczeństwa -- projekt\par}
-\vspace{1cm}
-{\LARGE\bfseries Aplikacja CRUD w wersji zabezpieczonej i~niezabezpieczonej: analiza zachowania i~ruchu sieciowego\par}
-\vspace{2cm}
-{\large \autor\par}
-{\album\par}
-\vspace{1cm}
-Prowadzący: \prowadzacy\par
+{\large \wydzial\par}
+{\large \katedra\par}
 \vfill
-\datapracy
+{\large \przedmiot\par}
+\vspace{0.6cm}
+{\LARGE\bfseries Projekt\par}
+\vspace{0.35cm}
+{\large Aplikacja CRUD w~wersji zabezpieczonej i~niezabezpieczonej \\ --- analiza zachowania i~ruchu sieciowego\par}
+\vfill
+{\large \autorzy\par}
+{\large grupa \grupa\par}
+\vspace{0.3cm}
+{\large \today\par}
+\vspace*{\fill}
 \end{titlepage}
 
 \tableofcontents
 \newpage
+\pagenumbering{arabic}
 
 \section{Wstęp}
 
@@ -49,8 +57,8 @@ Celem projektu jest opracowanie prostej aplikacji CRUD oraz porównanie jej zach
 
 Obie wersje powstają z~jednego kodu źródłowego. O~trybie decyduje zmienna środowiskowa \kod{SECURE}:
 \begin{itemize}
-\item \vuln{} (\kod{SECURE=0}) -- HTTP na porcie 3000, wszystkie zabezpieczenia wyłączone,
-\item \secure{} (\kod{SECURE=1}) -- HTTPS na porcie 3443, wszystkie zabezpieczenia włączone.
+\item \vuln{} (\kod{SECURE=0}) --- HTTP na porcie 3000, wszystkie zabezpieczenia wyłączone,
+\item \secure{} (\kod{SECURE=1}) --- HTTPS na porcie 3443, wszystkie zabezpieczenia włączone.
 \end{itemize}
 Dzięki temu różnice w~wynikach pomiarów i~ataków wynikają wyłącznie z~zabezpieczeń, a~nie z~odmiennej funkcjonalności. Zademonstrowano jedenaście podatności wraz z~poprawkami.
 
@@ -74,7 +82,7 @@ Poza zakresem są: wysoka dostępność, trwałość danych, atak na system oper
 
 \paragraph{CSRF i~sesje.} Barth, Jackson i~Mitchell~\cite{barth} przeanalizowali obrony przed CSRF: tajny token, nagłówek \kod{Referer} i~nagłówki niestandardowe. Obecnie uzupełnia je atrybut \kod{SameSite}, opisany w~projekcie następcy RFC~6265~\cite{rfc6265,rfc6265bis}. OWASP~\cite{owaspsession} wymaga identyfikatora sesji o~entropii co najmniej 64~bitów, atrybutów \kod{Secure}, \kod{HttpOnly} i~\kod{SameSite} oraz wygasania sesji egzekwowanego po stronie serwera.
 
-\paragraph{Hasła.} OWASP~\cite{owasppass} zaleca Argon2id, a~gdy jest niedostępny -- scrypt~\cite{rfc7914}. NIST SP~800-63B-4~\cite{nist} wymaga co najmniej 15~znaków, jeśli hasło jest jedynym składnikiem uwierzytelniania; ASVS~5.0 dopuszcza 8, silnie zalecając 15.
+\paragraph{Hasła.} OWASP~\cite{owasppass} zaleca Argon2id, a~gdy jest niedostępny --- scrypt~\cite{rfc7914}. NIST SP~800-63B-4~\cite{nist} wymaga co najmniej 15~znaków, jeśli hasło jest jedynym składnikiem uwierzytelniania; ASVS~5.0 dopuszcza 8, silnie zalecając 15.
 
 \paragraph{Ochrona transmisji.} TLS~1.3 opisuje RFC~9846~\cite{rfc9846} (lipiec 2026), który zastąpił RFC~8446. HSTS~\cite{rfc6797} zapobiega powrotowi do HTTP. RFC~10024~\cite{rfc10024} wprowadza hybrydowe, odporne na komputery kwantowe uzgadnianie klucza, m.in. X25519MLKEM768. Szyfrowanie nie ukrywa wszystkiego: Chen i~in.~\cite{chen} pokazali, że rozmiary i~kolejność zaszyfrowanych pakietów ujawniają działania użytkownika aplikacji webowej. Zjawisko to potwierdzono pomiarem w~rozdziale~\ref{sec:ruch}.
 
@@ -82,7 +90,7 @@ Poza zakresem są: wysoka dostępność, trwałość danych, atak na system oper
 
 Tabela~\ref{tab:dobor} zestawia decyzje projektowe, rozważane alternatywy i~uzasadnienie.
 
-\begin{longtable}{L{2.6cm}L{3.1cm}L{3.0cm}L{5.8cm}}
+\begin{longtable}{L{2.3cm}L{3.2cm}L{2.9cm}L{5.5cm}}
 \caption{Dobór technik}\label{tab:dobor}\\
 \toprule
 Obszar & Wybór & Alternatywy & Uzasadnienie\\
@@ -96,7 +104,7 @@ XSS & \kod{textContent} + CSP & Sanitizer HTML & Notatki to zwykły tekst, HTML 
 Hasła & scrypt ($N=2^{14}$, $r=8$, $p=5$) & Argon2id, bcrypt, PBKDF2 & Funkcja dostępna w~\kod{node:crypto}, pamięciożerna, parametry z~listy OWASP~\cite{owasppass}. Domyślne $p=1$ w~Node.js jest słabsze.\\
 Sesja & Losowy token 256~b w~cookie, stan na serwerze & JWT & Sesję można natychmiast unieważnić przy wylogowaniu; JWT wymagałby listy odwołań.\\
 Cookie & \kod{\_\_Host-}, \kod{Secure}, \kod{HttpOnly}, \kod{SameSite=Strict} & \kod{localStorage} & Token niedostępny dla JavaScriptu; przedrostek wymusza \kod{Secure}, \kod{Path=/} i~brak \kod{Domain}.\\
-CSRF & Token w~nagłówku + \kod{SameSite} & Tylko \kod{SameSite} & Same atrybuty cookie nie wystarczają -- potwierdził to test w~Firefoksie (rozdz.~\ref{sec:csrf}).\\
+CSRF & Token w~nagłówku + \kod{SameSite} & Tylko \kod{SameSite} & Same atrybuty cookie nie wystarczają --- potwierdził to test w~Firefoksie (rozdz.~\ref{sec:csrf}).\\
 Brute force & 5 nieudanych prób/60~s na adres IP, kod 429 & CAPTCHA, blokada konta & Blokada konta pozwalałaby napastnikowi odciąć ofiarę. Liczone są tylko próby nieudane.\\
 Transmisja & HTTPS w~Node.js, certyfikat \kod{mkcert} & Reverse proxy, self-signed & Brak dodatkowych usług; lokalne CA daje połączenie bez ostrzeżeń, jak w~produkcji.\\
 Analiza ruchu & Wireshark/tshark & tcpdump, Burp & Dekodowanie HTTP i~TLS, możliwość skryptowania, deszyfrowanie za pomocą kluczy sesji.\\
@@ -106,9 +114,9 @@ Analiza ruchu & Wireshark/tshark & tcpdump, Burp & Dekodowanie HTTP i~TLS, możl
 
 \subsection{Architektura}
 \begin{figure}[H]\centering
-\begin{tikzpicture}[node distance=6mm and 7mm,box/.style={draw,rounded corners=2pt,align=center,font=\footnotesize,minimum height=9mm,inner sep=4pt},>={Latex}]
+\begin{tikzpicture}[node distance=6mm and 5mm,box/.style={draw,rounded corners=2pt,align=center,font=\footnotesize,minimum height=9mm,inner sep=4pt},>={Latex}]
 \node[box] (b) {Przeglądarka\\\kod{public/app.js}};
-\node[box,right=26mm of b] (h) {Nagłówki\\\kod{applyHeaders}};
+\node[box,right=24mm of b] (h) {Nagłówki\\\kod{applyHeaders}};
 \node[box,right=of h] (s) {Sesja\\\kod{requireAuth}};
 \node[box,right=of s] (c) {CSRF, walidacja\\\kod{requireCsrf}};
 \node[box,below=10mm of c] (r) {Operacja CRUD\\\kod{server.js}};
@@ -158,10 +166,10 @@ Usunięcie (D) & \kod{DELETE /api/notes/:id} & tak & tak\\
 
 \subsection{Model zagrożeń}
 \begin{itemize}
-\item \textbf{Podsłuchujący w~sieci} -- czyta pakiety między klientem a~serwerem (podatność 1).
-\item \textbf{Anonimowy napastnik} -- wysyła dowolne żądania do API (2, 8, 10, 11).
-\item \textbf{Zalogowany użytkownik} -- próbuje sięgnąć po cudze dane (2, 3, 5).
-\item \textbf{Obca strona WWW} -- otwarta w~tej samej przeglądarce (6, 7, 9).
+\item \textbf{Podsłuchujący w~sieci} --- czyta pakiety między klientem a~serwerem (podatność 1).
+\item \textbf{Anonimowy napastnik} --- wysyła dowolne żądania do API (2, 8, 10, 11).
+\item \textbf{Zalogowany użytkownik} --- próbuje sięgnąć po cudze dane (2, 3, 5).
+\item \textbf{Obca strona WWW} --- otwarta w~tej samej przeglądarce (6, 7, 9).
 \item \textbf{Osoba, która uzyskała kopię bazy} (4).
 \end{itemize}
 
@@ -203,7 +211,7 @@ Całe żądanie logowania jest widoczne w~jednym pakiecie (ramka 4, rys.~\ref{fi
 \begin{figure}[H]\centering\includegraphics[width=\linewidth]{ws-vuln-list}
 \caption{\vuln: połączenie logowania w~Wiresharku, zaznaczone \kod{POST /api/login}}\label{fig:wsv}\end{figure}
 \begin{figure}[H]\centering\includegraphics[width=.82\linewidth]{ws-vuln-follow}
-\caption{\vuln: treść połączenia -- hasło i~cookie tekstem jawnym}\label{fig:wsvf}\end{figure}
+\caption{\vuln: treść połączenia --- hasło i~cookie tekstem jawnym}\label{fig:wsvf}\end{figure}
 
 Podsłuch wystarcza do przejęcia konta bez znajomości hasła. Cookie odczytane z~pliku \kod{vuln.pcapng} wysłano ponownie, gdy sesja była aktywna:
 \dowod{replay.txt}{Odtworzenie sesji z przechwyconego cookie}
@@ -238,7 +246,8 @@ Aby upewnić się, że wewnątrz jest ten sam protokół, ten sam plik odczytano
 Podsłuchujący nadal zna adresy, porty, nazwę serwera, chwile i~rozmiary. W~TLS~1.3 z~AES-GCM rekord jest dłuższy od danych o~stałe 17~bajtów (1~B typu treści i~16~B znacznika uwierzytelniającego), więc długość żądania HTTP można odczytać co do bajta (tab.~\ref{tab:rozm}).
 
 \begin{table}[H]\centering\caption{Długość żądania HTTP i~rekordu TLS, który je przenosi (\secure)}\label{tab:rozm}
-\begin{tabular}{lrrr@{\hskip 5mm}lrrr}
+\small
+\begin{tabular}{lrrr@{\hskip 3mm}lrrr}
 \toprule
 Operacja & HTTP [B] & TLS [B] & różnica & Operacja & HTTP [B] & TLS [B] & różnica\\\midrule
 logowanie & 183 & 200 & 17 & edycja & 318 & 335 & 17\\
@@ -350,7 +359,7 @@ W~\secure{} token ma 256~bitów losowości, a~sesja wygasa po 30~minutach także
 \subsection{Nagłówki i obsługa błędów (9, 11)}
 \dowod{secure-headers.txt}{SECURE: nagłówki odpowiedzi}
 Błędny JSON w~\vuln{} zwraca ślad stosu ze ścieżkami katalogów i~nazwami plików bibliotek (fragment):
-\VerbatimInput[label=VULN: odpowiedź na błędny JSON,firstline=8,lastline=8]{evidence/vuln-error.txt}
+\dowod[firstline=8,lastline=8]{vuln-error.txt}{VULN: odpowiedź na błędny JSON}
 \dowod{secure-error.txt}{SECURE}
 
 \section{Weryfikacja}
