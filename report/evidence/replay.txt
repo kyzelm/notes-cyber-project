@@ -1,0 +1,5 @@
+cookie read from capture: sid=1
+GET /api/me with it:
+{"username":"alice","csrf":"10b4ca3d956630347fca1d9330f6ea5e"}
+GET /api/notes with it:
+[{"id":1,"title":"Alice shopping","body":"milk, eggs, bread"},{"id":2,"title":"Alice todo","body":"call the dentist"}]

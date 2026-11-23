@@ -1,0 +1,5 @@
+== 1. auth bypass: login with  x' OR '1'='1' --
+{"error":"bad credentials"}
+== 2. dump all credentials via UNION in search
+[]
+(SECURE mode returns bad credentials / [] — prepared statements neutralise both)

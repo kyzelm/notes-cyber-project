@@ -1,0 +1,16 @@
+    1 0.000000000           ::1 → ::1          TCP 94 36242 → 3443 [SYN] Seq=0 Win=65476 Len=0 MSS=65476 SACK_PERM TSval=1884792291 TSecr=0 WS=1024
+    2 0.000020248 0.000020248          ::1 → ::1          TCP 94 3443 → 36242 [SYN, ACK] Seq=0 Ack=1 Win=65464 Len=0 MSS=65476 SACK_PERM TSval=3168734697 TSecr=1884792291 WS=1024
+    3 0.000034104 0.000013856          ::1 → ::1          TCP 86 36242 → 3443 [ACK] Seq=1 Ack=1 Win=65536 Len=0 TSval=1884792291 TSecr=3168734697
+    4 0.000888687 0.000854583          ::1 → ::1          TLSv1.2 1687 Client Hello (SNI=localhost)
+    5 0.000899057 0.000010370          ::1 → ::1          TCP 86 3443 → 36242 [ACK] Seq=1 Ack=1602 Win=80896 Len=0 TSval=3168734698 TSecr=1884792292
+    6 0.001988694 0.001089637          ::1 → ::1          TLSv1.3 2783 Server Hello, Change Cipher Spec, Application Data, Application Data, Application Data, Application Data
+    7 0.001996720 0.000008026          ::1 → ::1          TCP 86 36242 → 3443 [ACK] Seq=1602 Ack=2698 Win=94208 Len=0 TSval=1884792293 TSecr=3168734699
+    8 0.002582455 0.000585735          ::1 → ::1          TLSv1.3 166 Change Cipher Spec, Application Data
+    9 0.002661264 0.000078809          ::1 → ::1          TLSv1.3 291 Application Data
+   10 0.002951622 0.000290358          ::1 → ::1          TLSv1.3 692 Application Data, Application Data
+   11 0.043143717 0.040192095          ::1 → ::1          TCP 86 36242 → 3443 [ACK] Seq=1887 Ack=3304 Win=95232 Len=0 TSval=1884792335 TSecr=3168734700
+   12 0.176703472 0.133559755          ::1 → ::1          TLSv1.3 684 Application Data
+   13 0.176714343 0.000010871          ::1 → ::1          TCP 86 36242 → 3443 [ACK] Seq=1887 Ack=3902 Win=95232 Len=0 TSval=1884792468 TSecr=3168734874
+   14 0.176991817 0.000277474          ::1 → ::1          TLSv1.3 110 Application Data
+   15 0.177084772 0.000092955          ::1 → ::1          TLSv1.3 110 Application Data
+   16 0.177093238 0.000008466          ::1 → ::1          TCP 86 36242 → 3443 [RST, ACK] Seq=1911 Ack=3926 Win=95232 Len=0 TSval=1884792468 TSecr=3168734874

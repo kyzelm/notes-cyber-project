@@ -1,0 +1,6 @@
+== 1. Alice reads note 3 (owned by Bob):
+{"id":3,"title":"Bob private","body":"my bank pin is 1234"}
+== 2. Alice overwrites note 3:
+{"ok":true}
+== 3. Alice reads note 3 again:
+{"id":3,"title":"Bob private","body":"hacked by alice"}

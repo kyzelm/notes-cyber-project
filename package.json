@@ -7,7 +7,7 @@
   "scripts": {
     "start:vuln": "SECURE=0 PORT=3000 node server.js",
     "start:secure": "SECURE=1 PORT=3443 node server.js",
-    "seed": "node db.js --seed"
+    "test": "node --test test.js"
   },
   "dependencies": {
     "express": "^4.21.2"

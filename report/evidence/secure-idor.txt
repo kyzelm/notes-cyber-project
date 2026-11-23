@@ -1,0 +1,6 @@
+== 1. Alice reads note 3 (owned by Bob):
+{"error":"not found"}
+== 2. Alice overwrites note 3:
+{"error":"not found"}
+== 3. Alice reads note 3 again:
+{"error":"not found"}

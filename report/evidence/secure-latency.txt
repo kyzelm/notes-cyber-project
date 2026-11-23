@@ -1,0 +1,3 @@
+new connection, n=200: tcp 0.10 ms, tls done 2.37 ms, total 2.79 ms
+reused connection, n=199: total 0.14 ms
+login, n=20: total 172.69 ms

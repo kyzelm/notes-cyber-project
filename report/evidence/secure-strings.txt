@@ -1,0 +1,6 @@
+alicepass      0 frames
+PIN do karty   0 frames
+csrf           0 frames
+Cookie         0 frames
+/api/notes     0 frames
+localhost      8 frames

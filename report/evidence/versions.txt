@@ -1,0 +1,5 @@
+v26.13.1
+TShark (Wireshark) 4.7.4.
+curl 8.23.0 (x86_64-pc-linux-gnu) libcurl/8.23.0
+openssl (node) 4.1.0
+7.3.5-zen1-1-zen

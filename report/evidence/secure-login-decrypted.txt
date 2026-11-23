@@ -1,0 +1,35 @@
+
+===================================================================
+Follow: http,ascii
+Filter: tcp.stream eq 0
+Node 0: [::1]:36242
+Node 1: [::1]:3443
+140
+POST /api/login HTTP/1.1
+Host: localhost:3443
+User-Agent: curl/8.23.0
+Accept: */*
+Content-Type: application/json
+Content-Length: 43
+
+
+43
+{"username":"alice","password":"alicepass"}
+	504
+HTTP/1.1 200 OK
+Content-Security-Policy: default-src 'self'
+Strict-Transport-Security: max-age=31536000
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Set-Cookie: __Host-sid=a51b47d7d9ab8c02118863ea3313a297f2113f1409f4e4cef26f6a37de03db0b; Path=/; Max-Age=1800; HttpOnly; Secure; SameSite=Strict
+Content-Type: application/json; charset=utf-8
+Content-Length: 72
+ETag: W/"48-hSrR15C+07vjhFmICU2tRx6SHJg"
+Date: Mon, 23 Nov 2026 10:35:00 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+
+	72
+{"ok":true,"csrf":"26b4dc50ac8f02b5035d0ac8eeb724b6","username":"alice"}
+===================================================================

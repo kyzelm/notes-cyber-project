@@ -1,0 +1,3 @@
+sid=1 -> {"username":"bob","csrf":"e69e4a2d6d269b0e6ceecadee600e61e"}
+sid=2 -> {"error":"not logged in"}
+sid=3 -> {"error":"not logged in"}

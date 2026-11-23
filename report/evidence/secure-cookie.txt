@@ -1,0 +1,1 @@
+Set-Cookie: __Host-sid=8d12350dea6f93b0b6ed87ac0dc987071db123470b4c640dc69a26d830ad6716; Path=/; Max-Age=1800; HttpOnly; Secure; SameSite=Strict

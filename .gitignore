@@ -3,3 +3,14 @@ certs/
 *.pcap
 *.pcapng
 .idea/
+!report/evidence/*.pcapng
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.nav
+report/*.snm
+report/*.fls
+report/*.fdb_latexmk
+report/*.xdv
+report/*.vrb

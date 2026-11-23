@@ -1,0 +1,11 @@
+
+===================================================================
+Protocol Hierarchy Statistics
+Filter: 
+
+frame                                    frames:131 bytes:57197
+  eth                                    frames:131 bytes:57197
+    ipv6                                 frames:131 bytes:57197
+      tcp                                frames:131 bytes:57197
+        tls                              frames:64 bytes:51403
+===================================================================

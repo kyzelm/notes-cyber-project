@@ -1,0 +1,3 @@
+sid=1 -> {"error":"not logged in"}
+sid=2 -> {"error":"not logged in"}
+sid=3 -> {"error":"not logged in"}

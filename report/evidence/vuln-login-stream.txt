@@ -1,0 +1,32 @@
+
+===================================================================
+Follow: http,ascii
+Filter: tcp.stream eq 0
+Node 0: [::1]:37834
+Node 1: [::1]:3000
+140
+POST /api/login HTTP/1.1
+Host: localhost:3000
+User-Agent: curl/8.23.0
+Accept: */*
+Content-Type: application/json
+Content-Length: 43
+
+
+43
+{"username":"alice","password":"alicepass"}
+	262
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Set-Cookie: sid=1; Path=/
+Content-Type: application/json; charset=utf-8
+Content-Length: 72
+ETag: W/"48-SMmqRUxuZI5sgTt3BSPz5BWIX1E"
+Date: Mon, 23 Nov 2026 10:34:55 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+
+	72
+{"ok":true,"csrf":"10b4ca3d956630347fca1d9330f6ea5e","username":"alice"}
+===================================================================

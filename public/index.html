@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Notes</title>
-  <!-- external stylesheet: same-origin, so CSP default-src 'self' allows it.
-       (inline <style> would be blocked by CSP in secure mode) -->
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -26,10 +24,12 @@
   <section id="app" class="hide">
     <p>Logged in as <b id="who"></b> <button id="logoutBtn">Log out</button></p>
     <input id="search" placeholder="search notes by title...">
-    <h3>New note</h3>
+    <h3 id="formTitle">New note</h3>
     <input id="title" placeholder="title">
     <textarea id="body" placeholder="body (try: &lt;img src=x onerror=alert(1)&gt;)"></textarea>
     <button id="addBtn">Add note</button>
+    <button id="cancelBtn" class="hide">Cancel</button>
+    <p id="appMsg"></p>
     <h3>Your notes</h3>
     <div id="notes"></div>
   </section>
